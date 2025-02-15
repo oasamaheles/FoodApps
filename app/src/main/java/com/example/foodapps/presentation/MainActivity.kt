@@ -134,7 +134,7 @@ fun AddTaskDialog(onDismiss: () -> Unit, onAddTask: (String) -> Unit) {
         Card(
             onClick = {},
             modifier = Modifier
-                .fillMaxWidth(0.8f) // جعل النافذة أصغر لتناسب الشاشة
+                .fillMaxWidth(0.8f)
                 .padding(10.dp),
             backgroundPainter = CardDefaults.cardBackgroundPainter()
         ) {
