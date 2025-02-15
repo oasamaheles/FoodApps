@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
             val firebaseService = FirebaseService()
             WearApp(firebaseService)
         }
+
     }
 }
 
