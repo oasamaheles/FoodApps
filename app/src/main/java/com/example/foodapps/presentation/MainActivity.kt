@@ -76,6 +76,7 @@ fun WearApp(firebaseService: FirebaseService) {
             onDismiss = { showDialog = false },
             onAddTask = { taskName ->
                 firebaseService.addTask(Task(task = taskName)) {
+                    firebaseService.listenForTasks { tasks.value = it }
                     showDialog = false
                 }
             }

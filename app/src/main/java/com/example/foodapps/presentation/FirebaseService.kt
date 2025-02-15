@@ -11,16 +11,23 @@ class FirebaseService {
             if (snapshot != null) {
                 val tasks = snapshot.documents.mapNotNull { doc ->
                     val task = doc.toObject(Task::class.java)
-                    task?.copy(id = doc.id) // تأكد من أن كل مهمة تملك معرفًا صحيحًا
+                    task?.copy(id = doc.id)
                 }
                 onTasksReceived(tasks)
             }
         }
     }
-
     fun addTask(task: Task, onComplete: () -> Unit) {
-        db.collection("tasks").add(task).addOnSuccessListener { onComplete() }
+        db.collection("tasks").add(task)
+            .addOnSuccessListener {
+                Log.d("FirebaseService", "Task added successfully")
+                onComplete()
+            }
+            .addOnFailureListener { e ->
+                Log.e("FirebaseService", "Error adding task: ", e)
+            }
     }
+
 
     fun updateTask(taskId: String, isCompleted: Boolean) {
         db.collection("tasks").document(taskId).update("isCompleted", isCompleted)
